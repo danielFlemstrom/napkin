@@ -1,4 +1,3 @@
-
 import sys
 import datetime
 
@@ -9,9 +8,8 @@ def update_overall_analysis_view(results,outputdir):
     # Also create an overall analysis view
     tbl,raw = create_analysis_view(evaldata = results.copy(),
                                tableid="garesults")
-    tbl = tbl.render(escape = False) 
-    pandas_css,ga_table = tbl.split("</style>")
-
+    tbl = tbl.to_html(escape=False)
+    pandas_css, ga_table = tbl.split("</style>")
 
     page_main_table = \
         f'''
@@ -25,10 +23,9 @@ def update_overall_analysis_view(results,outputdir):
     fail_css = ""
     fail_template = '.nicetable .col_heading.colX {background-color: red;}'
     fails = results[results.tc_res != "Passed"]
-    #display(fails)
+    # display(fails)
     for f in set(fails['tc']):
         fail_css += fail_template.replace('X', str(raw.columns.get_loc(f)))
-
 
     page_style = f"{pandas_css} {css} {fail_css} </style>"
     page =  '<meta http-equiv="refresh" content="1">' +  page_style + page_main_table
@@ -36,5 +33,5 @@ def update_overall_analysis_view(results,outputdir):
     page = page.replace('id="T_garesults"','class="nicetable"')
     fname = outputdir + f"/ANALYSIS_overview.html".replace(" ","_").replace(":","-")
     with open( fname,"w") as f:
-            f.write(page)
+        f.write(page)
     print("Sessions Overview Created",fname)

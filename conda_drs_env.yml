@@ -1,0 +1,12 @@
+name: drs
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - openpyxl
+  - pandas
+  - matplotlib
+  - flask
+  - bottle
+  - autobahn
+  - python-dotenv
