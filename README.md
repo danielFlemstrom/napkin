@@ -136,5 +136,4 @@ is related to this project. Should this patent be seen as covering whole or
 parts of this project, this patent is explicitly considered part of the
 *essential patent claims* as per the license.
 
-# test alex
-Testing commit permissions.
+
